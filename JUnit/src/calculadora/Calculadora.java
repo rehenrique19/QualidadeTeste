@@ -14,7 +14,7 @@ public class Calculadora {
 	 * @return O valor retornado é a soma dos dois números
 	 */
 	public int soma (int a, int b) {
-		return a + b + 1;
+		return a + b;
 	}
 	
 	/**
