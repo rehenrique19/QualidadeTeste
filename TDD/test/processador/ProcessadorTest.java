@@ -86,6 +86,6 @@ class ProcessadorTest {
 			Pagamento pagItem = (Pagamento) i.next();
 			Assertions.assertEquals("BOLETO",pagItem.getTipoPagamento()); 
 		}
-		Assertions.assertEquals(false,this.fatura.getPago());
+		Assertions.assertEquals(true,this.fatura.getPago());
 	}
 }
