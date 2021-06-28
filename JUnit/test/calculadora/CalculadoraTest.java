@@ -11,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import junit.framework.Assert;
+
 @DisplayName("Classe para teste da calculadora")
 public class CalculadoraTest {
 	
@@ -49,5 +51,54 @@ public class CalculadoraTest {
 		assertThrows(ArithmeticException.class,
 				() -> calc.divisao(8, 0));
 	}
+	
+	@SuppressWarnings("deprecation")
+	@DisplayName("Comparação de numero maior")
+	@Test
+	public void comparaMaior() {
+		int comp = calc.compara(8, 5);
+		Assert.assertEquals(1, comp);
+	}
+	
+	@SuppressWarnings("deprecation")
+	@DisplayName("Comparação de numero menor")
+	@Test
+	public void comparaMenor() {
+		int comp = calc.compara(5, 10);
+		Assert.assertEquals(-1, comp);
+	}
+	
+	@SuppressWarnings("deprecation")
+	@DisplayName("Comparação de numero menor")
+	@Test
+	public void comparaIgual() {
+		int comp = calc.compara(5, 5);
+		Assert.assertEquals(0, comp);
+	}
 
+	@SuppressWarnings("deprecation")
+	@DisplayName("Verifica numero positivo")
+	@Test
+	public void positivo() {
+		boolean comp = calc.ehPositivo(5);
+		Assert.assertEquals(true, comp);
+	}
+	
+	@SuppressWarnings("deprecation")
+	@DisplayName("Verifica numero negativo")
+	@Test
+	public void negativo() {
+		boolean comp = calc.ehPositivo(-5);
+		Assert.assertEquals(false, comp);
+	}
+	
+	@SuppressWarnings("deprecation")
+	@DisplayName("Verifica somatoria de um numero")
+	@Test
+	public void somatorio() {
+		int comp = calc.somatoria(13);
+		Assert.assertEquals(91, comp);
+	}
 }
+
+

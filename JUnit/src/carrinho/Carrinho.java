@@ -43,5 +43,19 @@ public class Carrinho {
 		items.clear();
 	}
 	
+	public Produto ultimoItemAdicionado() {
+		return (Produto) items.get(items.size() - 1);
+	}
+	
 
+	public boolean carrinhoSemAlgumProduto(Produto prod) {
+		for(Iterator i = items.iterator(); i.hasNext();) {
+			Produto item = (Produto) i.next();
+			if (item.getNome() == prod.getNome()) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
+
