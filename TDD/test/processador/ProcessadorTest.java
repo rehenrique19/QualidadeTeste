@@ -7,6 +7,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -28,14 +29,22 @@ class ProcessadorTest {
 	
 	@BeforeEach
 	public void inicializa() {
-		fatura = new Fatura("Renan Henrique", new Date(), 1500.00);
-		var boleto1 = new Boleto("123456-1", new Date(), 500.00);
-		var boleto2 = new Boleto("123456-2", new Date(), 400.00);
-		var boleto3 = new Boleto("123456-3", new Date(), 100.00);
+		var date = new Date();
+		fatura = new Fatura("Renan Henrique", date, 1500.00);
+		var boleto1 = new Boleto("123456-1", date, 500.00);
+		var boleto2 = new Boleto("123456-2", date, 400.00);
+		var boleto3 = new Boleto("123456-3", date, 100.00);
+		boletos = new ArrayList<Boleto>();
 		boletos.add(boleto1);
 		boletos.add(boleto2);
 		boletos.add(boleto3);
 		processador = new Processador(boletos, fatura);
+	}
+	
+	@Test
+	public void testSomaBoletos() {
+		var retorno = processador.getValorTotalBoletos();
+		Assertions.assertEquals(retorno, 1000.00);
 	}
 	
 	@Test
@@ -45,8 +54,9 @@ class ProcessadorTest {
 		Assertions.assertEquals(retorno.size(), 3);
 		for (Iterator i = retorno.iterator(); i.hasNext();) {
 			Pagamento pagItem = (Pagamento) i.next();
-			Assertions.assertEquals("BOLETO", pagItem.getTipoPagamento());
+			Assertions.assertEquals("BOLETO",pagItem.getTipoPagamento()); 
 		}
-		Assertions.assertEquals(false, this.fatura.getPago());
+		Assertions.assertEquals(false,this.fatura.getPago());
+		 
 	}
 }

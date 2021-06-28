@@ -1,5 +1,6 @@
 package processador;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -28,7 +29,7 @@ public class Processador {
 	}
 	
 	public List<Pagamento> processaFatura() {
-		List<Pagamento> pagamentos = null;
+		List<Pagamento> pagamentos = new ArrayList<Pagamento>();
 		for (Iterator i = this.boletos.iterator(); i.hasNext();) {
 			Boleto item = (Boleto) i.next();
 			Date date = new Date();
