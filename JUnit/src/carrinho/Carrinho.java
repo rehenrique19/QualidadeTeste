@@ -8,12 +8,15 @@ import produto.ProdutoNaoEncontradoException;
 
 public class Carrinho {
 	
+	@SuppressWarnings("rawtypes")
 	private ArrayList items;
 	
+	@SuppressWarnings("rawtypes")
 	public Carrinho() {
 		items = new ArrayList();
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public double getValorTotal() {
 		double valorTotal = 0.0;
 		
@@ -25,6 +28,7 @@ public class Carrinho {
 		return valorTotal;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void addItem(Produto item) {
 		items.add(item);
 	}
@@ -48,6 +52,7 @@ public class Carrinho {
 	}
 	
 
+	@SuppressWarnings("rawtypes")
 	public boolean carrinhoSemAlgumProduto(Produto prod) {
 		for(Iterator i = items.iterator(); i.hasNext();) {
 			Produto item = (Produto) i.next();

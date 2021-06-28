@@ -31,14 +31,14 @@ public class CarrinhoTest {
 	
 	@DisplayName("Teste adição no Carrinho")
 	@Test public void adiciona() {
-		var prod = new Produto("Azeitona", 5.00);
+		Produto prod = new Produto("Azeitona", 5.00);
 		car.addItem(prod);
 		Assert.assertEquals(prod, car.ultimoItemAdicionado()); 
 	}	
 	
 	@DisplayName("Teste remoção no Carrinho")
 	@Test public void remove() throws ProdutoNaoEncontradoException {
-		var prod = new Produto("Azeitona", 5.00);
+		Produto prod = new Produto("Azeitona", 5.00);
 		car.addItem(prod);
 		car.removeItem(prod);
 		Assert.assertEquals(true, car.carrinhoSemAlgumProduto(prod)); 
@@ -46,9 +46,9 @@ public class CarrinhoTest {
 	
 	@DisplayName("Teste valor total do Carrinho")
 	@Test public void total() {
-		var prod = new Produto("Azeitona", 5.00);
-		var prod2 = new Produto("Creme de Leite", 2.30);
-		var prod3 = new Produto("Margarina", 4.50);
+		Produto prod = new Produto("Azeitona", 5.00);
+		Produto prod2 = new Produto("Creme de Leite", 2.30);
+		Produto prod3 = new Produto("Margarina", 4.50);
 		car.addItem(prod);
 		car.addItem(prod2);
 		car.addItem(prod3);
