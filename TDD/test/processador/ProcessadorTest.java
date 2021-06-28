@@ -26,11 +26,16 @@ class ProcessadorTest {
 	Processador processador;
 	List<Boleto> boletos;
 	Fatura fatura;
+	Date date;
 	
 	@BeforeEach
 	public void inicializa() {
-		var date = new Date();
+		date = new Date();
 		fatura = new Fatura("Renan Henrique", date, 1500.00);
+	}
+	
+	@Test
+	public void testSomaBoletos() {
 		var boleto1 = new Boleto("123456-1", date, 500.00);
 		var boleto2 = new Boleto("123456-2", date, 400.00);
 		var boleto3 = new Boleto("123456-3", date, 100.00);
@@ -39,16 +44,21 @@ class ProcessadorTest {
 		boletos.add(boleto2);
 		boletos.add(boleto3);
 		processador = new Processador(boletos, fatura);
-	}
-	
-	@Test
-	public void testSomaBoletos() {
 		var retorno = processador.getValorTotalBoletos();
 		Assertions.assertEquals(retorno, 1000.00);
 	}
 	
 	@Test
-	public void testProcessaBoletos() {
+	public void testProcessaBoletosComFaturaMaior() {
+
+		var boleto1 = new Boleto("123456-1", date, 500.00);
+		var boleto2 = new Boleto("123456-2", date, 400.00);
+		var boleto3 = new Boleto("123456-3", date, 100.00);
+		boletos = new ArrayList<Boleto>();
+		boletos.add(boleto1);
+		boletos.add(boleto2);
+		boletos.add(boleto3);
+		processador = new Processador(boletos, fatura);
 		var retorno = processador.processaFatura();
 		System.out.print(retorno);
 		Assertions.assertEquals(retorno.size(), 3);
@@ -57,6 +67,25 @@ class ProcessadorTest {
 			Assertions.assertEquals("BOLETO",pagItem.getTipoPagamento()); 
 		}
 		Assertions.assertEquals(false,this.fatura.getPago());
-		 
+	}
+	
+	@Test
+	public void testProcessaBoletosComFaturaMenor() {
+		var boleto1 = new Boleto("123456-1", date, 500.00);
+		var boleto2 = new Boleto("123456-2", date, 400.00);
+		var boleto3 = new Boleto("123456-3", date, 600.00);
+		boletos = new ArrayList<Boleto>();
+		boletos.add(boleto1);
+		boletos.add(boleto2);
+		boletos.add(boleto3);
+		processador = new Processador(boletos, fatura);
+		var retorno = processador.processaFatura();
+		System.out.print(retorno);
+		Assertions.assertEquals(retorno.size(), 3);
+		for (Iterator i = retorno.iterator(); i.hasNext();) {
+			Pagamento pagItem = (Pagamento) i.next();
+			Assertions.assertEquals("BOLETO",pagItem.getTipoPagamento()); 
+		}
+		Assertions.assertEquals(false,this.fatura.getPago());
 	}
 }
